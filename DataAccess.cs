@@ -56,8 +56,6 @@ namespace SqlDataAccessDemo
             {
                 DateTime? updated = DateTime.Now;
                 Person updatedPerson = new Person { first_name = firstName, last_name = lastName, email = email, gender = gender, updated = updated };
-                //List<Person> personList = new List<Person>();
-                //personList.Add(newPerson);
 
                 connection.Execute("dbo.People_Update @first_name, @last_name, @email, @gender,  @updated", updatedPerson);
             }

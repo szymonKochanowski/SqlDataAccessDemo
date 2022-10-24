@@ -14,11 +14,6 @@ namespace SqlDataAccessDemo
             UpdateBinding();
         }
 
-        private void UpdateBinding()
-        {
-            peopleFoundListBox.DataSource = personList;
-            peopleFoundListBox.DisplayMember = "fullInfo";
-        }
 
         public void searchButton_Click(object sender, EventArgs e)
         {
@@ -27,6 +22,12 @@ namespace SqlDataAccessDemo
             UpdateBinding();
         }
 
+        private void UpdateBinding()
+        {
+            peopleFoundListBox.DataSource = personList;
+            peopleFoundListBox.DisplayMember = "fullInfo";
+        }
+        
         private void insertButton_Click(object sender, EventArgs e)
         {
             DatabaseAccess databaseAccess = new DatabaseAccess();
@@ -38,6 +39,24 @@ namespace SqlDataAccessDemo
             genderInsertTextBox.Text = "";
         }
 
-        //todo - add query to upadate and delete and maybe somethig more
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            DatabaseAccess databaseAccess = new DatabaseAccess();
+            databaseAccess.DeletePersonById(IdTextBox.Text);
+            IdTextBox.Text = "";
+            UpdateBinding();
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            DatabaseAccess databaseAccess = new DatabaseAccess();
+            databaseAccess.UpdatePersonByEmail(firstNameInsertTextBox.Text, lastNameInsertTexBox.Text, emailInsertTextBox.Text, genderInsertTextBox.Text);
+
+            firstNameInsertTextBox.Text = "";
+            lastNameInsertTexBox.Text = "";
+            emailInsertTextBox.Text = "";
+            genderInsertTextBox.Text = "";
+        }
+
     }
 }

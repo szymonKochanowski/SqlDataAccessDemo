@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace SqlDataAccessDemo
 {
@@ -37,6 +38,28 @@ namespace SqlDataAccessDemo
 
                 // Third way to write sql query in db
                 connection.Execute("dbo.People_Insert @first_name, @last_name, @email, @gender, @created, @updated", personList);
+            }
+        }
+
+        internal void DeletePersonById(string textId)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                int id = Convert.ToInt32(textId);
+                connection.Query<Person>("dbo.People_DeleteById @id", new { id = id });
+            }
+        }
+
+        internal void UpdatePersonByEmail(string firstName, string lastName, string email, string gender)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                DateTime? updated = DateTime.Now;
+                Person updatedPerson = new Person { first_name = firstName, last_name = lastName, email = email, gender = gender, updated = updated };
+                //List<Person> personList = new List<Person>();
+                //personList.Add(newPerson);
+
+                connection.Execute("dbo.People_Update @first_name, @last_name, @email, @gender,  @updated", updatedPerson);
             }
         }
     }

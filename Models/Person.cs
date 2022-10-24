@@ -20,7 +20,7 @@ namespace SqlDataAccessDemo.Models
         {
             get 
             { 
-                return  $"{first_name} {last_name} {email} {gender} {created} {updated}"; 
+                return  $"{id} {first_name} {last_name} {email} {gender} {created} {updated}"; 
             }
         }
 

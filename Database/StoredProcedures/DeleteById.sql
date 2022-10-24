@@ -1,0 +1,14 @@
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[People_DeleteById]
+	@id int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DELETE FROM dbo.People WHERE id = @id;
+END
+GO
